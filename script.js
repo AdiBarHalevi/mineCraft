@@ -13,25 +13,25 @@ function preGame(game) {
       : (tutorialSection.style.display = `none`);
   });
   sizeBtn.addEventListener(`change`, (e) => {
-    sizeSection.addEventListener(`change`,(e)=>{
-      switch(e.target.id){
+    sizeSection.addEventListener(`change`, (e) => {
+      switch (e.target.id) {
         case `small`:
-          gamePlayObj[`size`] = 100
-          reset()
-          break
+          gamePlayObj[`size`] = 100;
+          reset();
+          break;
         case `medium`:
-          gamePlayObj[`size`] = 200
-          break
+          gamePlayObj[`size`] = 200;
+          break;
         case `large`:
-          gamePlayObj[`size`] = 300
-          reset()
-          break
+          gamePlayObj[`size`] = 400;
+          reset();
+          break;
         case `xlarge`:
-          gamePlayObj[`size`] = 400
-          reset()
-          break
+          gamePlayObj[`size`] = 600;
+          reset();
+          break;
       }
-    })
+    });
     e.target.checked
       ? (sizeSection.style.display = `unset`)
       : (sizeSection.style.display = `none`);
@@ -44,75 +44,120 @@ function preGame(game) {
   });
 }
 
-function constructGrid(){
-  const gridSection = document.querySelector(`.grid`)
-  const screen = document.querySelector(`.screen`)
-  switch (gamePlayObj.size){
-    case 300:
-      gridSection.style.width =`80rem`
-      screen.style.overflowX= `scroll`
-      break
+function constructGrid() {
+  const gridSection = document.querySelector(`.grid`);
+  const screen = document.querySelector(`.screen`);
+  switch (gamePlayObj.size) {
     case 400:
-      gridSection.style.width =`200rem`
+      gridSection.style.width = `100rem`;
+      screen.style.overflowX = `scroll`;
       gridSection.style.gridTemplateColumns = `repeat(20, 1fr)`;
-      screen.style.overflowX= `scroll`
-      
-      break
+      break;
+    case 600:
+      gridSection.style.width = `200rem`;
+      gridSection.style.gridTemplateColumns = `repeat(50, 1fr)`;
+      screen.style.overflowX = `scroll`;
+
+      break;
   }
-  for(v=0;v<gamePlayObj.size;v++){
-    gridSection.appendChild(document.createElement(`div`))
+  for (v = 0; v < gamePlayObj.size; v++) {
+    gridSection.appendChild(document.createElement(`div`));
   }
 }
 
 function gridGen() {
   let grid = document.querySelectorAll(`.grid div`);
-  for (let r = 0; r < grid.length; r++) {
-    if (r < (grid.length/2+20) && r > (grid.length/2+9)) {
-      grid[r].classList = `grass`;
-    } else if (r > (grid.length/2+9)) {
-      grid[r].classList = `ground`;
-    } else {
-      grid[r].classList = `sky`;
+  if(gamePlayObj.size === 100||gamePlayObj.size===200){
+    for (let r = 0; r < grid.length; r++) {
+      if (r < grid.length * 0.6 + 20 && r > grid.length * 0.6 + 9) {
+        grid[r].classList = `grass`;
+      } else if (r > grid.length * 0.6 + 9) {
+        grid[r].classList = `ground`;
+      } else {
+        grid[r].classList = `sky`;
+      }
+    }
+  }else{
+    if(gamePlayObj.size === 400){
+      for (let r = 0; r < grid.length; r++) {
+        if (r < grid.length * 0.6 + 20 && r > grid.length * 0.6 -1) {
+          grid[r].classList = `grass`;
+        } else if (r > grid.length * 0.6 + 9) {
+          grid[r].classList = `ground`;
+        } else {
+          grid[r].classList = `sky`;
+        }
+      }
+    }
+    if(gamePlayObj.size === 600){
+      for (let r = 0; r < grid.length; r++) {
+        if (r < grid.length * 0.6 + 40 && r > grid.length * 0.6 -11) {
+          grid[r].classList = `grass`;
+        } else if (r > grid.length * 0.6 + 9) {
+          grid[r].classList = `ground`;
+        } else {
+          grid[r].classList = `sky`;
+        }
+      }
     }
   }
 }
 
 function landScapeGen(gamePlayObj) {
   let sky = document.querySelectorAll(`.sky`);
-  let selectedObj = {
-    tree: [sky[sky.length - 3], sky[sky.length - 13], sky[sky.length - 23],sky[sky.length - 33]],
-    leaf: [
-      sky[sky.length - 22],
-      sky[sky.length - 24],
-      sky[sky.length - 32],
-      sky[sky.length - 33],
-      sky[sky.length - 34],
-      sky[sky.length - 42],
-      sky[sky.length - 43],
-      sky[sky.length - 44],
-      sky[sky.length - 52],
-      sky[sky.length - 53],
-      sky[sky.length - 54],
-    ],
-    rock: [
-      sky[sky.length - 8],
-      sky[sky.length - 7],
-      sky[sky.length - 17],
-      sky[sky.length - 18],
-      sky[sky.length - 27],
-    ],
-  };
-  selectedObj.tree.forEach((e) => {
-    e.classList = "tree";
-  });
-  selectedObj.leaf.forEach((e) => {
-    e.classList = "leaves";
-  });
-  selectedObj.rock.forEach((e) => {
-    e.classList = "rock";
-  });
-  gamePlayObj[`map`] = document.querySelectorAll(`.grid div`);
-  return gamePlayObj;
+  let selectedObj
+    selectedObj = {
+      tree: [
+        sky[sky.length - 3],
+        sky[sky.length - 13],
+        sky[sky.length - 23],
+        sky[sky.length - 33],
+      ],
+      leaf: [
+        sky[sky.length - 22],
+        sky[sky.length - 24],
+        sky[sky.length - 32],
+        sky[sky.length - 33],
+        sky[sky.length - 34],
+        sky[sky.length - 42],
+        sky[sky.length - 43],
+        sky[sky.length - 44],
+        sky[sky.length - 52],
+        sky[sky.length - 53],
+        sky[sky.length - 54],
+      ],
+      rock: [
+        sky[sky.length - 8],
+        sky[sky.length - 7],
+        sky[sky.length - 17],
+        sky[sky.length - 18],
+        sky[sky.length - 27],
+        sky[sky.length - 28],
+      ],
+    };
+  if(gamePlayObj.size === 400){
+    selectedObj.leaf.push(sky[sky.length - 62])
+    selectedObj.leaf.push(sky[sky.length - 63])
+    selectedObj.leaf.push(sky[sky.length - 64])
+    selectedObj.leaf.push(sky[sky.length - 72])
+    selectedObj.leaf.push(sky[sky.length - 73])
+    selectedObj.leaf.push(sky[sky.length - 74])
+    selectedObj.rock.push(sky[sky.length - 37])
+    selectedObj.rock.push(sky[sky.length - 38])
+    selectedObj.rock.push(sky[sky.length - 47])
+    selectedObj.rock.push(sky[sky.length - 48])
+  }
+    selectedObj.tree.forEach((e) => {
+      e.classList = "tree";
+    });
+    selectedObj.leaf.forEach((e) => {
+      e.classList = "leaves";
+    });
+    selectedObj.rock.forEach((e) => {
+      e.classList = "rock";
+    });
+    gamePlayObj[`map`] = document.querySelectorAll(`.grid div`);
+    return gamePlayObj;
 }
 
 function gamePrep(gamePlayObj) {
@@ -130,20 +175,20 @@ function lunchWebsite() {
   const game = document.querySelector(`.game`);
   preGame(game);
   gamePrep(gamePlayObj);
-  constructGrid()
+  constructGrid();
   gridGen();
   landScapeGen(gamePlayObj);
   gamePlay();
-  const reset = document.querySelector(`.reset`)
-  reset.addEventListener(`click`,(e)=>{
-    const gridArr = document.querySelectorAll(`.grid div`)
-    gridArr.forEach((e)=>{
-      e.remove()
-    })
-    constructGrid()
-    gridGen()
+  const reset = document.querySelector(`.reset`);
+  reset.addEventListener(`click`, (e) => {
+    const gridArr = document.querySelectorAll(`.grid div`);
+    gridArr.forEach((e) => {
+      e.remove();
+    });
+    constructGrid();
+    gridGen();
     landScapeGen(gamePlayObj);
-  })
+  });
 }
 
 function gamePlay() {
@@ -356,24 +401,24 @@ function build() {
   });
 }
 
-function reset(){
-  const gridArr = document.querySelectorAll(`.grid div`)
-  gridArr.forEach((e)=>{
-    e.remove()
-  })
-  constructGrid()
-  gridGen()
+function reset() {
+  const gridArr = document.querySelectorAll(`.grid div`);
+  gridArr.forEach((e) => {
+    e.remove();
+  });
+  constructGrid();
+  gridGen();
   landScapeGen(gamePlayObj);
+}
+function mediaQuerry() {
+  const windowSize = window.innerWidth;
+  const reset = document.querySelector(`.reset`);
+  const game = document.querySelector(`.game`);
+  if (windowSize < 600) {
+    reset.remove();
+    game.appendChild(reset);
+  }
 }
 
 lunchWebsite();
-mediaQuerry()
-function mediaQuerry(){
-  const windowSize = window.innerWidth;
-  const reset = document.querySelector(`.reset`)
-  const game = document.querySelector(`.game`)
-  if(windowSize<600){
-    reset.remove()
-    game.appendChild(reset)
-  }
-}
+mediaQuerry();

@@ -17,17 +17,16 @@ body {
   position: relative;
   width: 50vw;
   height: 30vh;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   backdrop-filter: blur(4px);
 }
 
 .pre-game .logo {
   background: url(./resource/minecraft_logo.png) center center/cover;
-  height: 12rem;
-  width: 50rem;
+  height: 5rem;
+  width: 28rem;
   align-self: center;
 }
 
@@ -60,9 +59,9 @@ body {
   height: 7rem;
   width: 35rem;
   font-family: roboto;
-  left: 11rem;
+  left: 6rem;
+  top: 2rem;
   display: none;
-  top: -2rem;
 }
 
 #checkbox1,
@@ -89,8 +88,8 @@ body {
     position: absolute;
     height: 9rem;
     width: 19rem;
-    left: 30rem;
-    top: -5rem;
+    left: 24rem;
+    top:0rem;
 }
 
 #checkbox1 {
@@ -101,7 +100,7 @@ body {
   right: 0rem;
 }
 .screen{
-  width: 60rem;
+  width: 50rem;
 }
 
 .grid {
