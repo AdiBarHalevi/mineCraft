@@ -367,3 +367,13 @@ function reset(){
 }
 
 lunchWebsite();
+mediaQuerry()
+function mediaQuerry(){
+  const windowSize = window.innerWidth;
+  const reset = document.querySelector(`.reset`)
+  const game = document.querySelector(`.game`)
+  if(windowSize<600){
+    reset.remove()
+    game.appendChild(reset)
+  }
+}

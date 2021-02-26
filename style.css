@@ -229,10 +229,58 @@ body {
     height: 11rem;
     width: 23rem;
     font-family: roboto;
-    left: -8rem;
-    top: 0rem;
+    left: -9rem;
+    top: 1rem;
 
   }
+  .select-size{
+    position: absolute;
+    top: 3rem;
+    width: 19rem;
+    left: -6rem;
+    top: 3rem;
+  }
+  .sidebar{
+    width: 30rem;
+    grid-template-columns: repeat(8,1fr);
+    height: 4rem;
+    width: 22rem;
+    margin: 0rem;
+  }
+
+  .game .logo{
+    height: 4rem;
+    width: 15rem;
+  }
+
+  .game{
+    flex-direction: column;
+    height: 800px;
+    align-items: center;
+  }
+
+  .reset{
+    align-self: center;
+    font-size: 12px;
+  }
+
+  .screen{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .grid{
+    width: 90%;
+    height: 500px;
+  }
+
+  .sidecontent{
+    margin: 0;
+  }
+  
 
 }
 
