@@ -1,3 +1,5 @@
+const gamePlayObj = {};
+
 function preGame(game) {
   const pregameSection = document.querySelector(`.pre-game`);
   const tutorialSection = document.querySelector(`.tutorialSection`);
@@ -10,49 +12,293 @@ function preGame(game) {
   });
   startBtn.addEventListener(`change`, function (e) {
     if (e.target.checked) {
-        pregameSection.style.display = `none`
-        game.style.display = `flex`
+      pregameSection.style.display = `none`;
+      game.style.display = `flex`;
     }
   });
 }
 
 function gridGen() {
-    let grid = document.querySelectorAll(`.innerDiv`);
-    for (let r = 0; r < grid.length; r++) {
-      if (r < grid.length-20 && r > grid.length-31) {
-        grid[r].classList = `grass`;
-      } else if (r > grid.length-30) {
-        grid[r].classList = `ground`;
-      } else {
-        grid[r].classList = `sky`;
-      }
+  let grid = document.querySelectorAll(`.innerDiv`);
+  for (let r = 0; r < grid.length; r++) {
+    if (r < grid.length - 20 && r > grid.length - 31) {
+      grid[r].classList = `grass`;
+    } else if (r > grid.length - 30) {
+      grid[r].classList = `ground`;
+    } else {
+      grid[r].classList = `sky`;
     }
   }
-
-function landScapeGen(){
-    let sky = document.querySelectorAll(`.sky`)
-    let selectedObj = {
-    tree:[sky[sky.length-3],sky[sky.length-13],sky[sky.length-23]],
-    leaf:[sky[sky.length-22],sky[sky.length-24],
-        sky[sky.length-32],sky[sky.length-33],sky[sky.length-34],
-        sky[sky.length-42],sky[sky.length-43],sky[sky.length-44]],
-    rock:[sky[sky.length-7],sky[sky.length-6],sky[sky.length-17],sky[sky.length-16],sky[sky.length-27]]
-}
-    selectedObj.tree.forEach((e)=>{e.classList = "tree"})
-    selectedObj.leaf.forEach((e)=>{e.classList = "leaves"})
-    selectedObj.rock.forEach((e)=>{e.classList = "rock"})
-
 }
 
+function landScapeGen(gamePlayObj) {
+  let sky = document.querySelectorAll(`.sky`);
+  let selectedObj = {
+    tree: [sky[sky.length - 3], sky[sky.length - 13], sky[sky.length - 23]],
+    leaf: [
+      sky[sky.length - 22],
+      sky[sky.length - 24],
+      sky[sky.length - 32],
+      sky[sky.length - 33],
+      sky[sky.length - 34],
+      sky[sky.length - 42],
+      sky[sky.length - 43],
+      sky[sky.length - 44],
+    ],
+    rock: [
+      sky[sky.length - 7],
+      sky[sky.length - 6],
+      sky[sky.length - 17],
+      sky[sky.length - 16],
+      sky[sky.length - 27],
+    ],
+  };
+  selectedObj.tree.forEach((e) => {
+    e.classList = "tree";
+  });
+  selectedObj.leaf.forEach((e) => {
+    e.classList = "leaves";
+  });
+  selectedObj.rock.forEach((e) => {
+    e.classList = "rock";
+  });
+  gamePlayObj[`map`] = document.querySelectorAll(`.grid div`);
+  return gamePlayObj;
+}
 
+function gamePrep(gamePlayObj) {
+  gamePlayObj[`ground`] = document.querySelector(`#ground`);
+  gamePlayObj[`leaves`] = document.querySelector(`#leaves`);
+  gamePlayObj[`tree`] = document.querySelector(`#tree`);
+  gamePlayObj[`rock`] = document.querySelector(`#rock`);
+  gamePlayObj[`grass`] = document.querySelector(`#grass`);
+  gamePlayObj[`chosenAction`] = `false`;
+  return gamePlayObj;
+}
 
+function lunchWebsite() {
+  const game = document.querySelector(`.game`);
+  preGame(game);
+  gamePrep(gamePlayObj);
+  gridGen();
+  landScapeGen(gamePlayObj);
+  gamePlay(gamePlayObj);
+}
 
-function lunchWebsite(preGame) {
-    const game = document.querySelector(`.game`);
-    preGame(game);
-    gridGen()
-    landScapeGen()
-  }
+function gamePlay(gamePlayObj) {
+  collect();
+  build();
+}
 
-lunchWebsite(preGame);
+function actionPick(gamePlayObj) {
+  let side = document.querySelector(`.sidebar`);
+  let divArr = document.querySelectorAll(`.sidebar div`);
+  side.addEventListener(`click`, (e) => {
+    console.log(e.target.id);
+    switch (e.target.id) {
+      case `axe`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#axe`);
+        break;
+      case `shovel`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#shovel`);
+        break;
+      case `pickaxe`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#pickaxe`);
+        break;
+      case `ground`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#ground`);
+        break;
+      case `leaves`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#leaves`);
+        break;
+      case `rock`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#rock`);
+        break;
+      case `grass`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#grass`);
+        break;
+      case `tree`:
+        gamePlayObj[`chosenAction`] = document.querySelector(`#tree`);
+        break;
+    }
+    divArr.forEach((e) => {
+      e.style.border = `2px solid black`;
+    });
+    gamePlayObj.chosenAction.style.border = `2px solid red`;
+  });
+}
 
+function elementPick(gamePlayObj) {
+  document.querySelector(`.grid`).addEventListener(`click`, (e) => {
+    switch (e.target.classList.value) {
+      case `ground`:
+        switch (gamePlayObj.chosenAction.id) {
+          case `shovel`:
+            e.target.classList.value = `sky`;
+            gamePlayObj.ground.textContent++;
+            break;
+          case `axe`: {
+            e.target.classList.add(`wrong-choice`);
+            break;
+          }
+          case `pickaxe`: {
+            e.target.classList.add(`wrong-choice`);
+            break;
+          }
+          case `false`: {
+            console.log(`not good`);
+            break;
+          }
+        }
+        break;
+      case `grass`:
+        switch (gamePlayObj.chosenAction.id) {
+          case `shovel`:
+            e.target.classList.value = `sky`;
+            gamePlayObj.grass.textContent++;
+            break;
+          case `axe`: {
+            e.target.classList.add(`wrong-choice`);
+            break;
+          }
+          case `pickaxe`: {
+            e.target.classList.add(`wrong-choice`);
+            break;
+          }
+          case `false`: {
+            console.log(`not good`);
+            break;
+          }
+        }
+        break;
+      case `rock`:
+        switch (gamePlayObj.chosenAction.id) {
+          case `shovel`:
+            e.target.classList.add(`wrong-choice`);
+            break;
+          case `axe`: {
+            e.target.classList.add(`wrong-choice`);
+            break;
+          }
+          case `pickaxe`: {
+            e.target.classList.value = `sky`;
+            gamePlayObj.rock.textContent++;
+            console.log(gamePlayObj);
+            break;
+          }
+          case `false`: {
+            console.log(`not good`);
+            break;
+          }
+        }
+        break;
+      case `tree`:
+        switch (gamePlayObj.chosenAction.id) {
+          case `shovel`:
+            e.target.classList.add(`wrong-choice`);
+            break;
+          case `axe`: {
+            e.target.classList.value = `sky`;
+            gamePlayObj.tree.textContent++;
+            console.log(gamePlayObj);
+            break;
+          }
+          case `pickaxe`: {
+            e.target.classList.add(`wrong-choice`);
+            break;
+          }
+          case `false`: {
+            console.log(`not good`);
+            break;
+          }
+        }
+        break;
+      case `leaves`:
+        switch (gamePlayObj.chosenAction.id) {
+          case `shovel`:
+            e.target.classList.add(`wrong-choice`);
+            break;
+          case `axe`: {
+            e.target.classList.value = `sky`;
+            gamePlayObj.leaves.textContent++;
+            console.log(gamePlayObj);
+            break;
+          }
+          case `pickaxe`: {
+            e.target.classList.add(`wrong-choice`);
+            break;
+          }
+          case `false`: {
+            console.log(`not good`);
+            break;
+          }
+        }
+        break;
+      case `sky`:
+        switch (gamePlayObj.chosenAction.id) {
+          case `shovel`:
+            console.log(`not good`);
+            break;
+          case `axe`: {
+            console.log(`not good`);
+            break;
+          }
+          case `pickaxe`: {
+            console.log(`not good`);
+            break;
+          }
+          case `false`: {
+            console.log(`not good`);
+            break;
+          }
+        }
+    }
+  });
+}
+
+function collect() {
+  actionPick(gamePlayObj);
+  elementPick(gamePlayObj);
+}
+
+function build() {
+  document.querySelector(`.grid`).addEventListener(`click`, (e) => {
+    switch (e.target.classList.value) {
+      case `sky`:
+        switch (gamePlayObj.chosenAction.id) {
+          case `ground`:
+            if (gamePlayObj.ground.textContent > 0) {
+              e.target.classList.value = `ground`;
+              gamePlayObj.ground.textContent--;
+            }
+          break
+          case `grass`:
+            if (gamePlayObj.grass.textContent > 0) {
+              e.target.classList.value = `ground`;
+              gamePlayObj.grass.textContent--;
+            }
+          break
+          case `leaves`:
+            if (gamePlayObj.leaves.textContent > 0) {
+              e.target.classList.value = `leaves`;
+              gamePlayObj.leaves.textContent--;
+            }
+          break
+          case `tree`:
+            if (gamePlayObj.tree.textContent > 0) {
+              e.target.classList.value = `tree`;
+              gamePlayObj.tree.textContent--;
+            }
+          break
+          case `rock`:
+            if (gamePlayObj.rock.textContent > 0) {
+              e.target.classList.value = `rock`;
+              gamePlayObj.rock.textContent--;
+            }
+          break
+        }
+    }
+  });
+}
+
+lunchWebsite();
