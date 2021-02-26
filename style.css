@@ -51,6 +51,7 @@ body {
 }
 
 .tutorialSection,.select-size {
+  font-weight: 700;
   line-height: 2rem;
   text-align: center;
   position: absolute;
@@ -102,8 +103,6 @@ body {
 .screen{
   width: 60rem;
 }
-
-/* add overflow-x: scroll when the user adds more items*/
 
 .grid {
   display: grid;
@@ -205,6 +204,36 @@ body {
   50% {
     background: red;
   }
+}
+
+@media(max-width: 600px) {
+  body {
+    flex-direction: column;
+    width: 100%;
+  }
+  .pre-game{
+    width: 22vw;
+    height: 80vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .pre-game .logo{
+    height: 4rem;
+    width: 18rem;
+  }
+
+  .tutorialSection{
+    height: 11rem;
+    width: 23rem;
+    font-family: roboto;
+    left: -8rem;
+    top: 0rem;
+
+  }
+
 }
 
 

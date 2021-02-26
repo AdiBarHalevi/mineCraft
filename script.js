@@ -46,6 +46,19 @@ function preGame(game) {
 
 function constructGrid(){
   const gridSection = document.querySelector(`.grid`)
+  const screen = document.querySelector(`.screen`)
+  switch (gamePlayObj.size){
+    case 300:
+      gridSection.style.width =`80rem`
+      screen.style.overflowX= `scroll`
+      break
+    case 400:
+      gridSection.style.width =`200rem`
+      gridSection.style.gridTemplateColumns = `repeat(20, 1fr)`;
+      screen.style.overflowX= `scroll`
+      
+      break
+  }
   for(v=0;v<gamePlayObj.size;v++){
     gridSection.appendChild(document.createElement(`div`))
   }
@@ -193,7 +206,6 @@ function elementPick(gamePlayObj) {
             break;
           }
           case `false`: {
-            console.log(`not good`);
             break;
           }
         }
@@ -234,7 +246,6 @@ function elementPick(gamePlayObj) {
             break;
           }
           case `false`: {
-            console.log(`not good`);
             break;
           }
         }
@@ -255,7 +266,6 @@ function elementPick(gamePlayObj) {
             break;
           }
           case `false`: {
-            console.log(`not good`);
             break;
           }
         }
@@ -276,7 +286,6 @@ function elementPick(gamePlayObj) {
             break;
           }
           case `false`: {
-            console.log(`not good`);
             break;
           }
         }
@@ -295,7 +304,6 @@ function elementPick(gamePlayObj) {
             break;
           }
           case `false`: {
-            console.log(`not good`);
             break;
           }
         }
@@ -321,7 +329,7 @@ function build() {
             break;
           case `grass`:
             if (gamePlayObj.grass.textContent > 0) {
-              e.target.classList.value = `ground`;
+              e.target.classList.value = `grass`;
               gamePlayObj.grass.textContent--;
             }
             break;
