@@ -3,12 +3,38 @@ const gamePlayObj = {};
 function preGame(game) {
   const pregameSection = document.querySelector(`.pre-game`);
   const tutorialSection = document.querySelector(`.tutorialSection`);
+  const sizeSection = document.querySelector(`.select-size`);
   const tutorialBtn = document.querySelector(`#checkbox2`);
   const startBtn = document.querySelector(`#checkbox1`);
+  const sizeBtn = document.querySelector(`#checkbox3`);
   tutorialBtn.addEventListener(`change`, (e) => {
     e.target.checked
       ? (tutorialSection.style.display = `unset`)
       : (tutorialSection.style.display = `none`);
+  });
+  sizeBtn.addEventListener(`change`, (e) => {
+    sizeSection.addEventListener(`change`,(e)=>{
+      switch(e.target.id){
+        case `small`:
+          gamePlayObj[`size`] = 100
+          reset()
+          break
+        case `medium`:
+          gamePlayObj[`size`] = 200
+          break
+        case `large`:
+          gamePlayObj[`size`] = 300
+          reset()
+          break
+        case `xlarge`:
+          gamePlayObj[`size`] = 400
+          reset()
+          break
+      }
+    })
+    e.target.checked
+      ? (sizeSection.style.display = `unset`)
+      : (sizeSection.style.display = `none`);
   });
   startBtn.addEventListener(`change`, function (e) {
     if (e.target.checked) {
@@ -18,12 +44,19 @@ function preGame(game) {
   });
 }
 
+function constructGrid(){
+  const gridSection = document.querySelector(`.grid`)
+  for(v=0;v<gamePlayObj.size;v++){
+    gridSection.appendChild(document.createElement(`div`))
+  }
+}
+
 function gridGen() {
-  let grid = document.querySelectorAll(`.innerDiv`);
+  let grid = document.querySelectorAll(`.grid div`);
   for (let r = 0; r < grid.length; r++) {
-    if (r < grid.length - 20 && r > grid.length - 31) {
+    if (r < (grid.length/2+20) && r > (grid.length/2+9)) {
       grid[r].classList = `grass`;
-    } else if (r > grid.length - 30) {
+    } else if (r > (grid.length/2+9)) {
       grid[r].classList = `ground`;
     } else {
       grid[r].classList = `sky`;
@@ -34,7 +67,7 @@ function gridGen() {
 function landScapeGen(gamePlayObj) {
   let sky = document.querySelectorAll(`.sky`);
   let selectedObj = {
-    tree: [sky[sky.length - 3], sky[sky.length - 13], sky[sky.length - 23]],
+    tree: [sky[sky.length - 3], sky[sky.length - 13], sky[sky.length - 23],sky[sky.length - 33]],
     leaf: [
       sky[sky.length - 22],
       sky[sky.length - 24],
@@ -44,12 +77,15 @@ function landScapeGen(gamePlayObj) {
       sky[sky.length - 42],
       sky[sky.length - 43],
       sky[sky.length - 44],
+      sky[sky.length - 52],
+      sky[sky.length - 53],
+      sky[sky.length - 54],
     ],
     rock: [
+      sky[sky.length - 8],
       sky[sky.length - 7],
-      sky[sky.length - 6],
       sky[sky.length - 17],
-      sky[sky.length - 16],
+      sky[sky.length - 18],
       sky[sky.length - 27],
     ],
   };
@@ -72,6 +108,7 @@ function gamePrep(gamePlayObj) {
   gamePlayObj[`tree`] = document.querySelector(`#tree`);
   gamePlayObj[`rock`] = document.querySelector(`#rock`);
   gamePlayObj[`grass`] = document.querySelector(`#grass`);
+  gamePlayObj[`size`] = 200;
   gamePlayObj[`chosenAction`] = `false`;
   return gamePlayObj;
 }
@@ -80,12 +117,23 @@ function lunchWebsite() {
   const game = document.querySelector(`.game`);
   preGame(game);
   gamePrep(gamePlayObj);
+  constructGrid()
   gridGen();
   landScapeGen(gamePlayObj);
-  gamePlay(gamePlayObj);
+  gamePlay();
+  const reset = document.querySelector(`.reset`)
+  reset.addEventListener(`click`,(e)=>{
+    const gridArr = document.querySelectorAll(`.grid div`)
+    gridArr.forEach((e)=>{
+      e.remove()
+    })
+    constructGrid()
+    gridGen()
+    landScapeGen(gamePlayObj);
+  })
 }
 
-function gamePlay(gamePlayObj) {
+function gamePlay() {
   collect();
   build();
 }
@@ -94,7 +142,6 @@ function actionPick(gamePlayObj) {
   let side = document.querySelector(`.sidebar`);
   let divArr = document.querySelectorAll(`.sidebar div`);
   side.addEventListener(`click`, (e) => {
-    console.log(e.target.id);
     switch (e.target.id) {
       case `axe`:
         gamePlayObj[`chosenAction`] = document.querySelector(`#axe`);
@@ -271,34 +318,44 @@ function build() {
               e.target.classList.value = `ground`;
               gamePlayObj.ground.textContent--;
             }
-          break
+            break;
           case `grass`:
             if (gamePlayObj.grass.textContent > 0) {
               e.target.classList.value = `ground`;
               gamePlayObj.grass.textContent--;
             }
-          break
+            break;
           case `leaves`:
             if (gamePlayObj.leaves.textContent > 0) {
               e.target.classList.value = `leaves`;
               gamePlayObj.leaves.textContent--;
             }
-          break
+            break;
           case `tree`:
             if (gamePlayObj.tree.textContent > 0) {
               e.target.classList.value = `tree`;
               gamePlayObj.tree.textContent--;
             }
-          break
+            break;
           case `rock`:
             if (gamePlayObj.rock.textContent > 0) {
               e.target.classList.value = `rock`;
               gamePlayObj.rock.textContent--;
             }
-          break
+            break;
         }
     }
   });
+}
+
+function reset(){
+  const gridArr = document.querySelectorAll(`.grid div`)
+  gridArr.forEach((e)=>{
+    e.remove()
+  })
+  constructGrid()
+  gridGen()
+  landScapeGen(gamePlayObj);
 }
 
 lunchWebsite();
