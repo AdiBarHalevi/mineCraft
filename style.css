@@ -51,17 +51,18 @@ body {
 
 .tutorialSection,
 .select-size {
+  padding: 1rem;
   font-weight: 700;
   line-height: 2rem;
   text-align: center;
   position: absolute;
   border: 2px solid black;
   background: white;
-  height: 7rem;
+  height: 8rem;
   width: 35rem;
   font-family: roboto;
   left: 6rem;
-  top: 2rem;
+  top: 0rem;
   display: none;
 }
 
@@ -87,9 +88,10 @@ body {
   text-align: center;
   position: absolute;
   height: 7rem;
-  width: 19rem;
-  left: 20rem;
-  top: 5rem;
+  width: 28rem;
+  left: 10rem;
+  top: 0rem;
+  padding: 0;
 }
 
 #checkbox1 {
