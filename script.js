@@ -26,10 +26,6 @@ function preGame(game) {
           gamePlayObj[`size`] = 400;
           reset();
           break;
-        case `xlarge`:
-          gamePlayObj[`size`] = 600;
-          reset();
-          break;
       }
     });
     e.target.checked
@@ -53,12 +49,6 @@ function constructGrid() {
       screen.style.overflowX = `scroll`;
       gridSection.style.gridTemplateColumns = `repeat(20, 1fr)`;
       break;
-    case 600:
-      gridSection.style.width = `200rem`;
-      gridSection.style.gridTemplateColumns = `repeat(50, 1fr)`;
-      screen.style.overflowX = `scroll`;
-
-      break;
   }
   for (v = 0; v < gamePlayObj.size; v++) {
     gridSection.appendChild(document.createElement(`div`));
@@ -81,17 +71,6 @@ function gridGen() {
     if(gamePlayObj.size === 400){
       for (let r = 0; r < grid.length; r++) {
         if (r < grid.length * 0.6 + 20 && r > grid.length * 0.6 -1) {
-          grid[r].classList = `grass`;
-        } else if (r > grid.length * 0.6 + 9) {
-          grid[r].classList = `ground`;
-        } else {
-          grid[r].classList = `sky`;
-        }
-      }
-    }
-    if(gamePlayObj.size === 600){
-      for (let r = 0; r < grid.length; r++) {
-        if (r < grid.length * 0.6 + 40 && r > grid.length * 0.6 -11) {
           grid[r].classList = `grass`;
         } else if (r > grid.length * 0.6 + 9) {
           grid[r].classList = `ground`;
@@ -270,7 +249,6 @@ function elementPick(gamePlayObj) {
             break;
           }
           case `false`: {
-            console.log(`not good`);
             break;
           }
         }
@@ -323,7 +301,6 @@ function elementPick(gamePlayObj) {
           case `axe`: {
             e.target.classList.value = `sky`;
             gamePlayObj.leaves.textContent++;
-            console.log(gamePlayObj);
             break;
           }
           case `pickaxe`: {
@@ -338,14 +315,11 @@ function elementPick(gamePlayObj) {
       case `sky`:
         switch (gamePlayObj.chosenAction.id) {
           case `shovel`:
-            console.log(`not good`);
             break;
           case `axe`: {
-            console.log(`not good`);
             break;
           }
           case `pickaxe`: {
-            console.log(`not good`);
             break;
           }
           case `false`: {

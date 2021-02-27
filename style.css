@@ -84,12 +84,12 @@ body {
 
 .select-size{
   line-height: 2rem;
-    text-align: center;
-    position: absolute;
-    height: 9rem;
-    width: 19rem;
-    left: 24rem;
-    top:0rem;
+  text-align: center;
+  position: absolute;
+  height: 7rem;
+  width: 19rem;
+  left: 20rem;
+  top: 5rem;
 }
 
 #checkbox1 {
