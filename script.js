@@ -204,7 +204,7 @@ const gamePlayObj = {
           divArr.forEach((e) => {
             e.style.border = `2px solid black`;
           });
-          gamePlayObj.chosenAction.style.border = `2px solid red`;
+          gamePlayObj.chosenAction.style.border = `4px solid red`;
         });
       },
       elementPick: function () {
