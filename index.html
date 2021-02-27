@@ -34,20 +34,22 @@
           own unique world.
         </p>
       </div>
-      <div class="select-size"><form action="size">
-        <div>
-        <label for="small">small map</label>
-        <input type="radio" name="size" id="small">
+      <div class="select-size">
+        <form action="size">
+          <div>
+            <label for="small">small map</label>
+            <input type="radio" name="size" id="small" />
+          </div>
+          <div>
+            <label for="medium">medium map(recomended)</label>
+            <input type="radio" name="size" id="medium" checked />
+          </div>
+          <div>
+            <label for="large">large map</label>
+            <input type="radio" name="size" id="large" />
+          </div>
+        </form>
       </div>
-      <div>
-        <label for="medium">medium map(recomended)</label>
-        <input type="radio" name="size" id="medium" checked>
-      </div>
-      <div>
-        <label for="large">large map</label>
-        <input type="radio" name="size" id="large">
-      </div>
-      </form></div>
     </div>
     <div class="game">
       <div class="sidecontent">
@@ -65,9 +67,8 @@
         <button type="reset" class="reset">Reset game</button>
       </div>
       <div class="screen">
-      <div class="grid">
+        <div class="grid"></div>
       </div>
-    </div>
     </div>
     <script src="./script.js"></script>
   </body>

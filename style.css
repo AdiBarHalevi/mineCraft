@@ -37,7 +37,7 @@ body {
 
 .start,
 .tutorial,
-.size-btn{
+.size-btn {
   position: relative;
   margin: 1rem;
   height: 2rem;
@@ -49,7 +49,8 @@ body {
   color: #b4b5b5;
 }
 
-.tutorialSection,.select-size {
+.tutorialSection,
+.select-size {
   font-weight: 700;
   line-height: 2rem;
   text-align: center;
@@ -73,16 +74,15 @@ body {
   opacity: 0;
 }
 
-.select-size > *{
+.select-size > * {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   font-size: 22px;
-
 }
 
-.select-size{
+.select-size {
   line-height: 2rem;
   text-align: center;
   position: absolute;
@@ -99,7 +99,7 @@ body {
 #checkbox2 {
   right: 0rem;
 }
-.screen{
+.screen {
   width: 50rem;
 }
 
@@ -111,7 +111,6 @@ body {
   color: white;
   grid-template-columns: repeat(10, 1fr);
 }
-
 
 .grid > * {
   border: 1px dashed lightgray;
@@ -191,12 +190,12 @@ body {
   animation: redMark 0.5s 2;
 }
 
-.reset{
-    width: 8rem;
-    height: 3rem;
-    margin-top: 2rem;
-    margin-left: 1rem;
-    font-size: 18px;
+.reset {
+  width: 8rem;
+  height: 3rem;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  font-size: 18px;
 }
 
 @keyframes redMark {
@@ -205,12 +204,12 @@ body {
   }
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
   body {
     flex-direction: column;
     width: 100%;
   }
-  .pre-game{
+  .pre-game {
     width: 22vw;
     height: 80vh;
     padding: 2rem;
@@ -219,68 +218,62 @@ body {
     justify-content: center;
     backdrop-filter: blur(4px);
   }
-  .pre-game .logo{
+  .pre-game .logo {
     height: 4rem;
     width: 18rem;
   }
 
-  .tutorialSection{
+  .tutorialSection {
     height: 11rem;
     width: 23rem;
     font-family: roboto;
     left: -9rem;
     top: 1rem;
-
   }
-  .select-size{
+  .select-size {
     position: absolute;
     top: 3rem;
     width: 19rem;
     left: -6rem;
     top: 3rem;
   }
-  .sidebar{
+  .sidebar {
     width: 30rem;
-    grid-template-columns: repeat(8,1fr);
+    grid-template-columns: repeat(8, 1fr);
     height: 4rem;
     width: 22rem;
     margin: 0rem;
   }
 
-  .game .logo{
+  .game .logo {
     height: 4rem;
     width: 15rem;
   }
 
-  .game{
+  .game {
     flex-direction: column;
-    height:500px;
+    height: 500px;
     align-items: center;
   }
 
-  .reset{
+  .reset {
     align-self: center;
     font-size: 12px;
   }
 
-  .screen{
+  .screen {
     width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
 
-  .grid{
+  .grid {
     width: 90%;
     height: 250px;
   }
 
-  .sidecontent{
+  .sidecontent {
     margin: 0;
   }
-  
-
 }
-
-

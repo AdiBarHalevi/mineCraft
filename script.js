@@ -1,5 +1,5 @@
 const gamePlayObj = {
-  preGame: function(){
+  preGame: function () {
     const game = document.querySelector(`.game`);
     const pregameSection = document.querySelector(`.pre-game`);
     const tutorialSection = document.querySelector(`.tutorialSection`);
@@ -39,7 +39,7 @@ const gamePlayObj = {
       }
     });
   },
-  reset:function(){
+  reset: function () {
     const gridArr = document.querySelectorAll(`.grid div`);
     gridArr.forEach((e) => {
       e.remove();
@@ -48,7 +48,7 @@ const gamePlayObj = {
     gamePlayObj.genGame.gridGen();
     gamePlayObj.genGame.landScapeGen();
   },
-  mediaQuerry:function(){
+  mediaQuerry: function () {
     const windowSize = window.innerWidth;
     const reset = document.querySelector(`.reset`);
     const game = document.querySelector(`.game`);
@@ -57,8 +57,8 @@ const gamePlayObj = {
       game.appendChild(reset);
     }
   },
-  genGame:{
-    gamePrep:function(){
+  genGame: {
+    gamePrep: function () {
       gamePlayObj[`ground`] = document.querySelector(`#ground`);
       gamePlayObj[`leaves`] = document.querySelector(`#leaves`);
       gamePlayObj[`tree`] = document.querySelector(`#tree`);
@@ -67,7 +67,7 @@ const gamePlayObj = {
       gamePlayObj[`size`] = 200;
       gamePlayObj[`chosenAction`] = `false`;
     },
-    constructGrid:function(){
+    constructGrid: function () {
       const gridSection = document.querySelector(`.grid`);
       const screen = document.querySelector(`.screen`);
       switch (gamePlayObj.size) {
@@ -81,9 +81,9 @@ const gamePlayObj = {
         gridSection.appendChild(document.createElement(`div`));
       }
     },
-    gridGen:function(){
+    gridGen: function () {
       let grid = document.querySelectorAll(`.grid div`);
-      if(gamePlayObj.size === 100||gamePlayObj.size===200){
+      if (gamePlayObj.size === 100 || gamePlayObj.size === 200) {
         for (let r = 0; r < grid.length; r++) {
           if (r < grid.length * 0.6 + 20 && r > grid.length * 0.6 + 9) {
             grid[r].classList = `grass`;
@@ -93,10 +93,10 @@ const gamePlayObj = {
             grid[r].classList = `sky`;
           }
         }
-      }else{
-        if(gamePlayObj.size === 400){
+      } else {
+        if (gamePlayObj.size === 400) {
           for (let r = 0; r < grid.length; r++) {
-            if (r < grid.length * 0.6 + 20 && r > grid.length * 0.6 -1) {
+            if (r < grid.length * 0.6 + 20 && r > grid.length * 0.6 - 1) {
               grid[r].classList = `grass`;
             } else if (r > grid.length * 0.6 + 9) {
               grid[r].classList = `ground`;
@@ -107,7 +107,7 @@ const gamePlayObj = {
         }
       }
     },
-    landScapeGen: function(){
+    landScapeGen: function () {
       let sky = document.querySelectorAll(`.sky`);
       let selectedObj;
       selectedObj = {
@@ -162,16 +162,16 @@ const gamePlayObj = {
       });
       gamePlayObj[`map`] = document.querySelectorAll(`.grid div`);
     },
-    genGame:function(){
-      this.gamePrep()
-      this.constructGrid()
-      this.gridGen()
-      this.landScapeGen()
-    }
+    genGame: function () {
+      this.gamePrep();
+      this.constructGrid();
+      this.gridGen();
+      this.landScapeGen();
+    },
   },
-  gamePlay:{
-    collect:{
-      actionPick:function(){
+  gamePlay: {
+    collect: {
+      actionPick: function () {
         let side = document.querySelector(`.sidebar`);
         let divArr = document.querySelectorAll(`.sidebar div`);
         side.addEventListener(`click`, (e) => {
@@ -207,7 +207,7 @@ const gamePlayObj = {
           gamePlayObj.chosenAction.style.border = `2px solid red`;
         });
       },
-      elementPick:function(){
+      elementPick: function () {
         document.querySelector(`.grid`).addEventListener(`click`, (e) => {
           switch (e.target.classList.value) {
             case `ground`:
@@ -322,12 +322,12 @@ const gamePlayObj = {
           }
         });
       },
-      collect:function(){
+      collect: function () {
         this.actionPick();
         this.elementPick();
       },
     },
-    build:function(){
+    build: function () {
       document.querySelector(`.grid`).addEventListener(`click`, (e) => {
         switch (e.target.classList.value) {
           case `sky`:
@@ -366,23 +366,22 @@ const gamePlayObj = {
         }
       });
     },
-    gamePlay:function(){
-      this.collect.collect()
-      this.build()
-    }
-  }
+    gamePlay: function () {
+      this.collect.collect();
+      this.build();
+    },
+  },
 };
 
-
 function lunchWebsite() {
-  gamePlayObj.preGame()
-  gamePlayObj.genGame.genGame()
+  gamePlayObj.preGame();
+  gamePlayObj.genGame.genGame();
   gamePlayObj.gamePlay.gamePlay();
   gamePlayObj.mediaQuerry();
   const reset = document.querySelector(`.reset`);
-  reset.addEventListener(`click`, ()=>{gamePlayObj.reset()});
+  reset.addEventListener(`click`, () => {
+    gamePlayObj.reset();
+  });
 }
 
-
 lunchWebsite();
-
