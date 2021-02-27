@@ -22,4 +22,33 @@ build a mimc to minecraft game:
      same function should put the element in the inventory, the function has to be speicif with the tool
      choosen.(**create another function to validate)
 
+-functions order:
+  1.pre game: that includes tutorial start button and game map size
+  2.genrate an object that will provide data through the process of the game.
+  3.generate the grid (inject it to the game)
+  4.assign classes to the divs of the grid (grass,sky,ground)
+  5.assign landscape once the basic layout is there.
+  6. use the matrix.
+  ***process note - i did use the matrix but i found it easy to use basic count.
+  7.create an dig function that includes - choosing a tool,and pointing on the right element
+  8.create a build function that includes - choosing an element and placing it correctly in the map.
+  9.create media querry for cellPhones.
+
+
+-additional features:
+ * make multiple maps(had to create reset button before)
+ ** let the user know if he choosen a wrong element/tool.
+ 
+
+
+
+
+
+process notes:
+
+- after a long while trying to remove the first part of the website, i found it better to play with its
+display rather then deleting it.
+after deleting it the game made a big process forwards.
+
+
 
