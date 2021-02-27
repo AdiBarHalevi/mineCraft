@@ -281,7 +281,6 @@ function elementPick(gamePlayObj) {
           case `axe`: {
             e.target.classList.value = `sky`;
             gamePlayObj.tree.textContent++;
-            console.log(gamePlayObj);
             break;
           }
           case `pickaxe`: {
